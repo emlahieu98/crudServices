@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Register</title>
+</head>
+<body>
+  <form>
+    Username: <input type="text" id="username">  </br>
+    Password: <input type="text" id="password"> </br>
+    Email: <input type="text" id="email">  </br>
+    <button type="button" id="btnRegister">Register</button> </br>
+    <a href="/login"> Move to login page </Login </a>
+  </form>
+</body>
+<script>
+  $('#btnRegister').click(function(){
+    let username = $('#username').val();
+    let password = $('#password').val();
+    let email = $('#email').val();
+    $.ajax({
+      url: '/users/register',
+      method: 'POST',
+      data: {
+        username,
+        password,
+        email
+      }
+    }).then( function(data) {
+        if(data){
+          alert(data.message);
+          window.location.href = '/login'
+        }
+    })
+  });
+</script>
+</html>
